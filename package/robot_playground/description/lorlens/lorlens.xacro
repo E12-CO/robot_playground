@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find robot_playground)/description/lorlens/materials.xacro" />
+<!-- <xacro:include filename="$(find robot_playground)/description/lorlens/lorlens.trans" /> -->
+<xacro:include filename="$(find robot_playground)/description/lorlens/lorlens.gazebo" />
+<link name="base_link">
+<inertial>
+    <origin xyz="-1.7582104591371063e-18 1.7582104591371063e-18 0.0" rpy="0 0 0"/>
+    <mass value="1.2689630975018171"/>
+    <inertia ixx="0.088436" iyy="0.088436" izz="3.6e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file:///$(find robot_playground)/meshes/lorlens/base_link.stl" scale="0.001 0.001 0.001"/>
+      <!-- <cylinder radius="0.06" length="0.023"/> -->
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file:///$(find robot_playground)/meshes/lorlens/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_1">
+  <inertial>
+    <origin xyz="-1.3921350368354625e-09 1.5592913802458983e-07 -0.024606173660177644" rpy="0 0 0"/>
+    <mass value="3.6202254452450355"/>
+    <inertia ixx="0.003987" iyy="0.003987" izz="0.007094" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.0 0.4572" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file:///$(find robot_playground)/meshes/lorlens/right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.0 0.4572" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file:///$(find robot_playground)/meshes/lorlens/right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_1">
+  <inertial>
+    <origin xyz="6.492212873234491e-15 -2.2801264027631916e-17 0.019215253585963266" rpy="0 0 0"/>
+    <mass value="2.9858173995262103"/>
+    <inertia ixx="0.003241" iyy="0.003241" izz="0.005999" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.0 -0.4572" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file:///$(find robot_playground)/meshes/lorlens/left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.0 -0.4572" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file:///$(find robot_playground)/meshes/lorlens/left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="joint_right" type="continuous">
+  <origin xyz="0.0 0.0 -0.4572" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<joint name="joint_left" type="continuous">
+  <origin xyz="0.0 0.0 0.4572" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<xacro:property name="body_color" value="Gazebo/Silver" />
+
+<gazebo>
+  <plugin name="control" filename="libgazebo_ros_control.so"/>
+</gazebo>
+<gazebo reference="base_link">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="right_1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="left_1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+</robot>
