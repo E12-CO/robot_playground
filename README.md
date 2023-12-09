@@ -1,16 +1,16 @@
-## robot_playground
+# robot_playground
 E12-RBClub simulation for past/future robotic competitions in gazebo 
 
-# How to use
+## How to use
 -TBA
 
-# List of Worlds
+## List of Worlds
 - ABU Robocon 2024
 
-# List of Robot Models
+## List of Robot Models
 - Lorlens
 
-# TODO
+## TODO
 - Add more worlds
 - Add more robot models
 - Add more control option
